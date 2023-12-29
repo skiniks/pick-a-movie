@@ -1,5 +1,5 @@
 import ProviderLogo from './ProviderLogo'
-import { ProviderCategory, WatchProvider } from '~/types'
+import type { ProviderCategory, WatchProvider } from '~/types'
 
 export interface ProviderCategorySectionProps {
   category: ProviderCategory

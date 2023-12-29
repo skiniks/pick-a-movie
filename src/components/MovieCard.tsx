@@ -53,22 +53,22 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, movieDetails, watchProvide
   }
 
   const getStarRating = (voteAverage: number) => {
-    const rating = (voteAverage / 10) * 5; // Convert vote average to a 5-star scale
-    return Math.round(rating * 2) / 2; // Round to nearest half
+    const rating = (voteAverage / 10) * 5 // Convert vote average to a 5-star scale
+    return Math.round(rating * 2) / 2 // Round to nearest half
   }
 
   const renderStarRating = () => {
-    const starRating = movieDetails ? getStarRating(movieDetails.vote_average) : 0;
-    const fullStars = Math.floor(starRating);
-    const hasHalfStar = starRating % 1 >= 0.5;
-    const totalHalves = 10;
+    const starRating = movieDetails ? getStarRating(movieDetails.vote_average) : 0
+    const fullStars = Math.floor(starRating)
+    const hasHalfStar = starRating % 1 >= 0.5
+    const totalHalves = 10
 
     return (
       <div className="rating rating-lg rating-half">
         {[...Array(totalHalves)].map((_, index) => {
-          const isFullStar = index < fullStars * 2;
-          const isHalfStar = index === fullStars * 2 && hasHalfStar;
-          const isChecked = isFullStar || isHalfStar;
+          const isFullStar = index < fullStars * 2
+          const isHalfStar = index === fullStars * 2 && hasHalfStar
+          const isChecked = isFullStar || isHalfStar
 
           return (
             <input
@@ -80,11 +80,11 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, movieDetails, watchProvide
               readOnly
               disabled
             />
-          );
+          )
         })}
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <div className="relative mt-8 mb-4">

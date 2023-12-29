@@ -19,6 +19,7 @@ function Home() {
   const [cast, setCast] = useState<CastMember[]>([])
   const [videos, setVideos] = useState<{ key: string }[]>([])
   const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null)
+  const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
     fetchGenres().then(genresMap => setGenres(genresMap))
@@ -86,15 +87,16 @@ function Home() {
   }
 
   const resetSearch = () => {
-    setStartYear('');
-    setEndYear('');
-    setSearchResults([]);
-    setShownMovieIds(new Set());
-    setWatchProviders({});
-    setCast([]);
-    setVideos([]);
-    setMovieDetails(null);
-  };
+    setStartYear('')
+    setEndYear('')
+    setSearchResults([])
+    setShownMovieIds(new Set())
+    setWatchProviders({})
+    setCast([])
+    setVideos([])
+    setMovieDetails(null)
+    setErrorMessage('')
+  }
 
   const currentYear = new Date().getFullYear()
   const yearOptions = Array.from({ length: currentYear - 1919 }, (_, i) => currentYear - i)
@@ -119,6 +121,8 @@ function Home() {
           onEndYearChange={handleEndYearChange}
           yearOptions={yearOptions}
           endYearOptions={endYearOptions}
+          errorMessage={errorMessage}
+          setErrorMessage={setErrorMessage}
         />
 
         {searchResults.map(result => (

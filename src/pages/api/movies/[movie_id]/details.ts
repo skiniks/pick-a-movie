@@ -21,11 +21,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       res.status(response.status).json({ message: 'Failed to fetch movie details', error: data.status_message })
   }
   catch (error) {
-    if (error instanceof Error) {
+    if (error instanceof Error)
       res.status(500).json({ message: 'Server error', error: error.message })
-    }
-    else {
+
+    else
       res.status(500).json({ message: 'Unknown server error' })
-    }
   }
 }

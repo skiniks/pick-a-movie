@@ -1,4 +1,4 @@
-import { WatchProvider } from '~/types'
+import type { WatchProvider } from '~/types'
 
 export interface ProviderLogoProps {
   provider: WatchProvider
