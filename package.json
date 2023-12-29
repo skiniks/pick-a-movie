@@ -1,0 +1,32 @@
+{
+  "name": "pick-a-movie",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@8.13.1",
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev --turbo",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "^14.0.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.6.0",
+    "@types/eslint": "^8.56.0",
+    "@types/node": "^20.10.5",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "autoprefixer": "^10.4.16",
+    "daisyui": "^4.4.24",
+    "eslint": "^8.56.0",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.3.3"
+  }
+}
