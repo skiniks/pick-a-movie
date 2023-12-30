@@ -1,14 +1,15 @@
 interface SearchFormProps {
-  startYear: string
-  endYear: string
-  onSearch: () => void
-  onStartYearChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
-  onEndYearChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
-  yearOptions: number[]
-  endYearOptions: number[]
-  onReset: () => void
-  errorMessage: string
-  setErrorMessage: (message: string) => void
+  startYear: string;
+  endYear: string;
+  onSearch: () => void;
+  onStartYearChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onEndYearChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  yearOptions: number[];
+  endYearOptions: number[];
+  onReset: () => void;
+  errorMessage: string;
+  setErrorMessage: (message: string) => void;
+  hasSearched: boolean
 }
 
 const SearchForm: React.FC<SearchFormProps> = ({
@@ -22,6 +23,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
   onReset,
   errorMessage,
   setErrorMessage,
+  hasSearched
 }) => {
   const handleSearch = () => {
     if (!startYear) {
@@ -71,7 +73,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
       </div>
 
       <button onClick={handleSearch} className="btn btn-active btn-primary ml-0 mt-2 sm:mt-0 sm:ml-4">
-        Search Movies
+        {hasSearched ? 'Search Again' : 'Search Movies'}
       </button>
 
       <button onClick={onReset} className="btn btn-outline btn-secondary ml-0 mt-2 sm:mt-0 sm:ml-4">

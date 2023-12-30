@@ -20,6 +20,7 @@ function Home() {
   const [videos, setVideos] = useState<{ key: string }[]>([])
   const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null)
   const [errorMessage, setErrorMessage] = useState('')
+  const [hasSearched, setHasSearched] = useState(false)
 
   useEffect(() => {
     fetchGenres().then(genresMap => setGenres(genresMap))
@@ -72,14 +73,17 @@ function Home() {
     catch (error) {
       console.error('Failed to search for movies:', error)
     }
+    setHasSearched(true)
   }
 
   const handleStartYearChange = (e: { target: { value: React.SetStateAction<string> } }) => {
     setStartYear(e.target.value)
+    setHasSearched(false)
   }
 
   const handleEndYearChange = (e: { target: { value: React.SetStateAction<string> } }) => {
     setEndYear(e.target.value)
+    setHasSearched(false)
   }
 
   const handleSearch = async () => {
@@ -96,6 +100,7 @@ function Home() {
     setVideos([])
     setMovieDetails(null)
     setErrorMessage('')
+    setHasSearched(false)
   }
 
   const currentYear = new Date().getFullYear()
@@ -123,6 +128,7 @@ function Home() {
           endYearOptions={endYearOptions}
           errorMessage={errorMessage}
           setErrorMessage={setErrorMessage}
+          hasSearched={hasSearched}
         />
 
         {searchResults.map(result => (
