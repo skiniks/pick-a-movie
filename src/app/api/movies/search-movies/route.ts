@@ -1,7 +1,10 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { type NextRequest, NextResponse } from 'next/server'
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const { startYear, endYear, genreId } = req.query
+export async function GET(req: NextRequest) {
+  const { searchParams } = req.nextUrl
+  const startYear = searchParams.get('startYear')
+  const endYear = searchParams.get('endYear')
+  const genreId = searchParams.get('genreId')
   const TMDB_API_KEY = process.env.TMDB_API_KEY
 
   try {
@@ -18,30 +21,24 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const initialResponse = await fetch(`${url}&page=1`)
     const initialData = await initialResponse.json()
 
-    if (!initialData || !initialData.total_pages) {
-      res.status(500).json({ message: 'Error fetching total pages' })
-      return
-    }
+    if (!initialData || !initialData.total_pages)
+      return new NextResponse(JSON.stringify({ message: 'Error fetching total pages' }), { status: 500 })
 
     const totalPages = Math.min(initialData.total_pages, 500)
     const randomPage = Math.floor(Math.random() * totalPages) + 1
     const randomPageResponse = await fetch(`${url}&page=${randomPage}`)
     const randomPageData = await randomPageResponse.json()
 
-    if (!randomPageData.results || randomPageData.results.length === 0) {
-      res.status(404).json({ message: 'No movies found' })
-      return
-    }
+    if (!randomPageData.results || randomPageData.results.length === 0)
+      return new NextResponse(JSON.stringify({ message: 'No movies found' }), { status: 404 })
 
     const randomIndex = Math.floor(Math.random() * randomPageData.results.length)
     const randomMovie = randomPageData.results[randomIndex]
-    res.status(200).json(randomMovie)
+    return new NextResponse(JSON.stringify(randomMovie), { status: 200 })
   }
-  catch (error: unknown) {
+  catch (error) {
     console.error('TMDB API request failed:', error)
-    if (error instanceof Error)
-      res.status(500).json({ message: 'Failed to search for movies', error: error.message })
-    else
-      res.status(500).json({ message: 'Failed to search for movies', error: 'An unknown error occurred' })
+    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred'
+    return new NextResponse(JSON.stringify({ message: 'Failed to search for movies', error: errorMessage }), { status: 500 })
   }
 }

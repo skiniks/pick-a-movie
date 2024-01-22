@@ -1,14 +1,14 @@
 interface SearchFormProps {
-  startYear: string;
-  endYear: string;
-  onSearch: () => void;
-  onStartYearChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  onEndYearChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  yearOptions: number[];
-  endYearOptions: number[];
-  onReset: () => void;
-  errorMessage: string;
-  setErrorMessage: (message: string) => void;
+  startYear: string
+  endYear: string
+  onSearch: () => void
+  onStartYearChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
+  onEndYearChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
+  yearOptions: number[]
+  endYearOptions: number[]
+  onReset: () => void
+  errorMessage: string
+  setErrorMessage: (message: string) => void
   hasSearched: boolean
 }
 
@@ -23,7 +23,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
   onReset,
   errorMessage,
   setErrorMessage,
-  hasSearched
+  hasSearched,
 }) => {
   const handleSearch = () => {
     if (!startYear) {

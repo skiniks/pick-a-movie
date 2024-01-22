@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import type { CastMember, Language, Movie, MovieDetails, WatchProviders } from '~/types'
