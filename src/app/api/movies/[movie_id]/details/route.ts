@@ -1,9 +1,8 @@
 import { type NextRequest, NextResponse } from 'next/server'
 
 export async function GET(req: NextRequest) {
-  // Extracting the movie_id from the pathname
   const pathParts = req.nextUrl.pathname.split('/')
-  const movie_id = pathParts[pathParts.length - 2] // Assuming `movie_id` is the second last part of the path
+  const movie_id = pathParts[pathParts.length - 2]
 
   const TMDB_API_KEY = process.env.TMDB_API_KEY
   const language = req.nextUrl.searchParams.get('language') || 'en-US'
